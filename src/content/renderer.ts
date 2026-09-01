@@ -17,6 +17,10 @@ const criterionLabels: Record<string, string> = {
 };
 const failureLabels: Record<string, string> = { "non-residential": "Posible uso no residencial / cambio de uso", "occupied-or-rented": "Actualmente alquilado, ocupado o sin posesión", "auction-or-cash-only": "Subasta o compra no financiable con hipoteca", "no-habitability-certificate": "Sin cédula o licencia de habitabilidad" };
 
+function formatPoints(value: number): string {
+  return value.toLocaleString("es-ES", { maximumFractionDigits: 1 });
+}
+
 function metroLineBadges(lines: MetroLine[]): string {
   return `<span class="ips-metro-lines">${lines.map(line => `<span class="ips-metro-line" aria-label="Línea ${escapeHtml(line.shortName)}" title="Línea ${escapeHtml(line.shortName)}" style="--ips-line-color:${safeColor(line.color, "#005aa9")};--ips-line-text:${safeColor(line.textColor, "#ffffff")}">${escapeHtml(line.shortName)}</span>`).join("")}</span>`;
 }
@@ -60,6 +64,24 @@ export function renderScore(card: Element, score: PropertyScore, metroRoute?: Me
   const button = document.createElement("button"); button.className = "ips-score-button"; button.type = "button";
   button.setAttribute("aria-expanded", "false");
   button.innerHTML = score.passed && score.score !== null ? `<span class="ips-score-label">Tu score</span><strong class="ips-score-number"><span>${score.score}</span><small>/100</small></strong><span class="ips-disclosure">Ver detalle</span>` : `<span class="ips-score-label">Tu score</span><strong class="ips-no-match">No cumple tus filtros</strong><span class="ips-disclosure">Ver detalle</span>`;
-  const details = document.createElement("div"); details.className = "ips-details"; const list = score.contributions.map(c => `<li><strong>${escapeHtml(criterionLabels[c.criterion] ?? c.criterion)}</strong>: ${escapeHtml(String(c.rawValue))} · ${Math.round(c.utility)} pts · peso ${c.weight} <em>${Math.round(c.confidence * 100)}% de confianza · ${escapeHtml(c.source)}</em></li>`).join(""); const metro = metroRoute ? `<p class="ips-metro"><span class="ips-metro-mark" aria-hidden="true"></span>${metroLineBadges(metroRoute.lines)}<strong>${escapeHtml(metroRoute.stationName)}</strong><span>${Math.round(metroRoute.distanceMeters)} m · ${Math.round(metroRoute.durationSeconds / 60)} min a pie</span></p>` : ""; const failures = score.failedFilters.map(id => failureLabels[id] ?? id).map(escapeHtml).join(", "); details.innerHTML = `<strong>Desglose del score</strong><ul>${list || "<li>No hay criterios con datos.</li>"}</ul>${metro}${failures ? `<p>Alerta: ${failures}</p>` : ""}`;
+  const details = document.createElement("div");
+  details.className = "ips-details";
+  const totalWeight = score.contributions.reduce((sum, contribution) => sum + contribution.weight, 0);
+  const totalPoints = totalWeight ? score.contributions.reduce((sum, contribution) => sum + contribution.weightedContribution / totalWeight, 0) : 0;
+  const list = score.contributions.map(contribution => {
+    const contributionPoints = totalWeight ? contribution.weightedContribution / totalWeight : 0;
+    const maxPoints = totalWeight ? 100 * contribution.weight / totalWeight : 0;
+    const utility = Math.max(0, Math.min(100, contribution.utility));
+    const utilityClass = utility < 40 ? "is-low" : utility < 70 ? "is-medium" : "is-high";
+    return `<li class="ips-factor ${utilityClass}">
+      <div class="ips-factor-name"><strong>${escapeHtml(criterionLabels[contribution.criterion] ?? contribution.criterion)}</strong><span>${escapeHtml(String(contribution.rawValue))}</span></div>
+      <strong class="ips-factor-points">+${formatPoints(contributionPoints)} pts</strong>
+      <span class="ips-factor-bar" aria-label="Valoración ${Math.round(utility)} de 100"><i style="--ips-factor-utility:${utility.toFixed(2)}%"></i></span>
+      <div class="ips-factor-meta"><span class="ips-factor-weight">Peso ${contribution.weight} · máx. ${formatPoints(maxPoints)} pts</span><em>${Math.round(contribution.confidence * 100)}% de confianza · ${escapeHtml(contribution.source)}</em></div>
+    </li>`;
+  }).join("");
+  const metro = metroRoute ? `<p class="ips-metro"><span class="ips-metro-mark" aria-hidden="true"></span>${metroLineBadges(metroRoute.lines)}<strong>${escapeHtml(metroRoute.stationName)}</strong><span>${Math.round(metroRoute.distanceMeters)} m · ${Math.round(metroRoute.durationSeconds / 60)} min a pie</span></p>` : "";
+  const failures = score.failedFilters.map(id => failureLabels[id] ?? id).map(escapeHtml).join(", ");
+  details.innerHTML = `<div class="ips-details-heading"><strong>Desglose del score</strong><span>${score.contributions.length} factores</span></div><ul class="ips-factor-list">${list || "<li>No hay criterios con datos.</li>"}</ul><div class="ips-details-total"><span>Suma de factores</span><strong>${formatPoints(totalPoints)} pts</strong><small>Score final <b>${score.score ?? "—"}/100</b></small></div>${metro}${failures ? `<p class="ips-details-alert">Alerta: ${failures}</p>` : ""}`;
   button.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const open = details.classList.toggle("is-open"); button.setAttribute("aria-expanded", String(open)); }); holder.append(button, details); host.prepend(holder); card.setAttribute("data-ips-score", String(score.score ?? -1)); card.setAttribute("data-ips-price", String(score.contributions.find(c => c.criterion === "price")?.rawValue ?? Number.MAX_SAFE_INTEGER)); card.setAttribute("data-ips-area", String(score.contributions.find(c => c.criterion === "areaM2")?.rawValue ?? -1));
 }

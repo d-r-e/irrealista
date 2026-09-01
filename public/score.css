@@ -43,12 +43,32 @@
 .ips-no-match { color: #9a3d37; font-size: 13px; }
 .ips-failed .ips-score-label, .ips-failed .ips-disclosure { color: #9a3d37; }
 
-.ips-details { position: absolute; top: calc(100% + 6px); left: 0; display: none; box-sizing: border-box; width: min(310px, calc(100vw - 48px)); max-height: 260px; margin: 0; padding: 10px 12px; overflow: auto; border: 1px solid #d6e5dd; border-radius: 8px; background: #fff; box-shadow: 0 8px 24px #0000002b; color: #44514b; font-size: 11px; font-weight: 500; pointer-events: auto; }
+.ips-details { position: absolute; top: calc(100% + 6px); left: 0; display: none; box-sizing: border-box; width: min(360px, calc(100vw - 48px)); max-height: 390px; margin: 0; padding: 12px; overflow: auto; border: 1px solid #d6e5dd; border-radius: 8px; background: #fff; box-shadow: 0 8px 24px #0000002b; color: #44514b; font-size: 11px; font-weight: 500; pointer-events: auto; }
 .ips-details.is-open { display: block; }
-.ips-details > strong { color: #285640; font-size: 12px; }
-.ips-details ul { display: grid; gap: 3px; margin: 7px 0 0; padding-left: 15px; }
+.ips-details-heading { display: flex; align-items: baseline; justify-content: space-between; gap: 10px; color: #285640; }
+.ips-details-heading > strong { font-size: 13px; }
+.ips-details-heading > span { color: #718078; font-size: 10px; font-weight: 700; text-transform: uppercase; }
+.ips-factor-list { display: grid; gap: 0; margin: 8px 0; padding: 0; list-style: none; }
+.ips-factor { display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 4px 8px; padding: 8px 0; border-top: 1px solid #e7eeea; }
+.ips-factor-name { display: flex; min-width: 0; align-items: baseline; gap: 5px; }
+.ips-factor-name strong { overflow: hidden; color: #35463e; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
+.ips-factor-name span { overflow: hidden; color: #77847e; text-overflow: ellipsis; white-space: nowrap; }
+.ips-factor-points { color: #176b49; font-size: 12px; white-space: nowrap; }
+.ips-factor-bar { grid-column: 1 / -1; display: block; height: 4px; overflow: hidden; background: #e7efea; border-radius: 99px; }
+.ips-factor-bar > i { display: block; width: var(--ips-factor-utility); height: 100%; background: #228154; border-radius: inherit; }
+.ips-factor.is-medium .ips-factor-bar > i { background: #ba8b25; }
+.ips-factor.is-low .ips-factor-bar > i { background: #bd5e56; }
+.ips-factor-meta { display: flex; grid-column: 1 / -1; align-items: center; justify-content: space-between; gap: 8px; color: #77847e; font-size: 10px; }
+.ips-factor-weight { padding: 2px 5px; border: 1px solid #dce9e2; background: #f7fbf8; color: #5a7064; font-weight: 700; white-space: nowrap; }
+.ips-factor-meta em { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.ips-details-total { display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 2px 10px; margin-top: 3px; padding: 8px 9px; border: 1px solid #cde2d6; background: #f3faf6; color: #386452; }
+.ips-details-total > span { font-weight: 700; }
+.ips-details-total > strong { color: #176b49; font-size: 14px; }
+.ips-details-total small { grid-column: 1 / -1; color: #708077; font-size: 10px; }
+.ips-details-total small b { color: #285640; }
 .ips-details em { color: #77847e; }
 .ips-details p { margin: 7px 0 0; color: #9a3d37; }
+.ips-details .ips-details-alert { padding: 7px 8px; border-left: 3px solid #ca6259; background: #fff5f4; }
 .ips-details .ips-metro { display: flex; align-items: center; flex-wrap: wrap; gap: 5px; color: #285640; }
 
 .item-info-container.ips-has-metro { position: relative; }
