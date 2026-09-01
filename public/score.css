@@ -55,6 +55,7 @@
 .ips-factor-name strong { overflow: hidden; color: #35463e; font-size: 12px; text-overflow: ellipsis; white-space: nowrap; }
 .ips-factor-name span { overflow: hidden; color: #77847e; text-overflow: ellipsis; white-space: nowrap; }
 .ips-factor-points { color: #176b49; font-size: 12px; white-space: nowrap; }
+.ips-factor-points.is-negative { color: #b44f48; }
 .ips-factor-bar { grid-column: 1 / -1; display: block; height: 4px; overflow: hidden; background: #e7efea; border-radius: 99px; }
 .ips-factor-bar > i { display: block; width: var(--ips-factor-utility); height: 100%; background: #228154; border-radius: inherit; }
 .ips-factor.is-medium .ips-factor-bar > i { background: #ba8b25; }

@@ -21,6 +21,10 @@ function formatPoints(value: number): string {
   return value.toLocaleString("es-ES", { maximumFractionDigits: 1 });
 }
 
+function formatSignedPoints(value: number): string {
+  return `${value > 0 ? "+" : value < 0 ? "−" : ""}${formatPoints(Math.abs(value))}`;
+}
+
 function metroLineBadges(lines: MetroLine[]): string {
   return `<span class="ips-metro-lines">${lines.map(line => `<span class="ips-metro-line" aria-label="Línea ${escapeHtml(line.shortName)}" title="Línea ${escapeHtml(line.shortName)}" style="--ips-line-color:${safeColor(line.color, "#005aa9")};--ips-line-text:${safeColor(line.textColor, "#ffffff")}">${escapeHtml(line.shortName)}</span>`).join("")}</span>`;
 }
@@ -75,7 +79,7 @@ export function renderScore(card: Element, score: PropertyScore, metroRoute?: Me
     const utilityClass = utility < 40 ? "is-low" : utility < 70 ? "is-medium" : "is-high";
     return `<li class="ips-factor ${utilityClass}">
       <div class="ips-factor-name"><strong>${escapeHtml(criterionLabels[contribution.criterion] ?? contribution.criterion)}</strong><span>${escapeHtml(String(contribution.rawValue))}</span></div>
-      <strong class="ips-factor-points">+${formatPoints(contributionPoints)} pts</strong>
+      <strong class="ips-factor-points${contributionPoints < 0 ? " is-negative" : ""}">${formatSignedPoints(contributionPoints)} pts</strong>
       <span class="ips-factor-bar" aria-label="Valoración ${Math.round(utility)} de 100"><i style="--ips-factor-utility:${utility.toFixed(2)}%"></i></span>
       <div class="ips-factor-meta"><span class="ips-factor-weight">Peso ${contribution.weight} · máx. ${formatPoints(maxPoints)} pts</span><em>${Math.round(contribution.confidence * 100)}% de confianza · ${escapeHtml(contribution.source)}</em></div>
     </li>`;

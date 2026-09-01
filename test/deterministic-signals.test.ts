@@ -66,4 +66,13 @@ describe("deterministic listing signals", () => {
     expect(needsUpdating.contributions.find(item => item.criterion === "needsRenovation")?.utility).toBe(10);
     expect(needsUpdating.score).toBeLessThan(updated.score ?? 100);
   });
+
+  it("makes basement and semi-basement floors subtract points", () => {
+    const basement = scoreProperty(normalizeListing(raw("Vivienda semisótano interior.")), defaultPreferences);
+    const floor = basement.contributions.find(item => item.criterion === "floor");
+
+    expect(floor?.rawValue).toBe(-1);
+    expect(floor?.utility).toBeLessThan(0);
+    expect(floor?.weightedContribution).toBeLessThan(0);
+  });
 });
