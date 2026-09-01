@@ -9,8 +9,9 @@ export function injectSorter(container: Element): void {
   const button = document.createElement("button");
   button.type = "button";
   button.className = "btn regular smaller ips-order-button";
-  button.textContent = "Tu score";
+  button.innerHTML = `<span class="ips-order-mark" aria-hidden="true"><i></i><i></i><i></i></span><span>Tu score</span>`;
   button.setAttribute("aria-label", "Ordenar por puntuación personal");
+  button.title = "Ordenar por tu score";
   item.append(button);
 
   const moreMenu = nativeToolbar.querySelector(":scope > li.dropdown-menu");

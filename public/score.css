@@ -66,10 +66,71 @@
 .ips-metro-walk { margin-left: auto; }
 .ips-metro-distance { color: #5f776b; font-weight: 600; }
 
-.ips-order-item { margin-left: 5px; padding: 3px; border: 1px solid #83bda2; border-radius: 6px; background: #eaf7f0; box-shadow: 0 0 0 2px #d5eee1; }
-.ips-order-button { appearance: none; box-sizing: border-box; border: 0!important; border-radius: 3px!important; background: transparent!important; color: #256a49!important; font: 700 14px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif!important; cursor: pointer; }
-.ips-order-button:hover, .ips-order-button:focus-visible { background: #fff!important; outline: none; }
-.ips-order-button.selected { background: #287653!important; color: #fff!important; box-shadow: inset 0 0 0 1px #1b5b3d; }
+#view-type-toolbar-buttons .ips-order-item {
+  display: flex;
+  align-items: stretch;
+  margin: 0 -1px 0 0;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+#view-type-toolbar-buttons .ips-order-button {
+  display: inline-flex;
+  align-items: center;
+  min-height: 40px;
+  gap: 7px;
+  padding: 0 13px;
+  appearance: none;
+  box-sizing: border-box;
+  border: 1px solid #9bcab5!important;
+  border-radius: 0!important;
+  background: #f2faf6!important;
+  box-shadow: inset 0 2px 0 #d9efe4;
+  color: #226a49!important;
+  font: 700 14px/1.2 system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif!important;
+  cursor: pointer;
+  transition: background .15s ease, border-color .15s ease, box-shadow .15s ease, color .15s ease;
+}
+
+#view-type-toolbar-buttons .ips-order-mark {
+  display: inline-flex;
+  align-items: end;
+  width: 13px;
+  height: 14px;
+  gap: 2px;
+}
+
+#view-type-toolbar-buttons .ips-order-mark i {
+  display: block;
+  width: 3px;
+  border-radius: 1px 1px 0 0;
+  background: currentColor;
+}
+
+#view-type-toolbar-buttons .ips-order-mark i:nth-child(1) { height: 5px; opacity: .58; }
+#view-type-toolbar-buttons .ips-order-mark i:nth-child(2) { height: 9px; opacity: .78; }
+#view-type-toolbar-buttons .ips-order-mark i:nth-child(3) { height: 13px; }
+
+#view-type-toolbar-buttons .ips-order-button:hover,
+#view-type-toolbar-buttons .ips-order-button:focus-visible {
+  position: relative;
+  z-index: 1;
+  border-color: #4e9a78!important;
+  background: #e6f5ed!important;
+  box-shadow: inset 0 2px 0 #c9e9d9, 0 0 0 2px #d9efe4;
+  outline: none;
+}
+
+#view-type-toolbar-buttons .ips-order-button.selected {
+  position: relative;
+  z-index: 1;
+  border-color: #247653!important;
+  background: #247653!important;
+  box-shadow: inset 0 2px 0 #4eaa7f, 0 0 0 2px #d4ebdf;
+  color: #fff!important;
+}
 
 @media (max-width: 540px) {
   .ips-confidence { display: none; }
