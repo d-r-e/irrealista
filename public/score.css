@@ -1,4 +1,5 @@
 .ips-score-host { position: relative; }
+.ips-score-host.ips-score-details-open { z-index: 20; }
 
 .ips-badge {
   position: absolute;

@@ -83,5 +83,16 @@ export function renderScore(card: Element, score: PropertyScore, metroRoute?: Me
   const metro = metroRoute ? `<p class="ips-metro"><span class="ips-metro-mark" aria-hidden="true"></span>${metroLineBadges(metroRoute.lines)}<strong>${escapeHtml(metroRoute.stationName)}</strong><span>${Math.round(metroRoute.distanceMeters)} m · ${Math.round(metroRoute.durationSeconds / 60)} min a pie</span></p>` : "";
   const failures = score.failedFilters.map(id => failureLabels[id] ?? id).map(escapeHtml).join(", ");
   details.innerHTML = `<div class="ips-details-heading"><strong>Desglose del score</strong><span>${score.contributions.length} factores</span></div><ul class="ips-factor-list">${list || "<li>No hay criterios con datos.</li>"}</ul><div class="ips-details-total"><span>Suma de factores</span><strong>${formatPoints(totalPoints)} pts</strong><small>Score final <b>${score.score ?? "—"}/100</b></small></div>${metro}${failures ? `<p class="ips-details-alert">Alerta: ${failures}</p>` : ""}`;
-  button.addEventListener("click", event => { event.preventDefault(); event.stopPropagation(); const open = details.classList.toggle("is-open"); button.setAttribute("aria-expanded", String(open)); }); holder.append(button, details); host.prepend(holder); card.setAttribute("data-ips-score", String(score.score ?? -1)); card.setAttribute("data-ips-price", String(score.contributions.find(c => c.criterion === "price")?.rawValue ?? Number.MAX_SAFE_INTEGER)); card.setAttribute("data-ips-area", String(score.contributions.find(c => c.criterion === "areaM2")?.rawValue ?? -1));
+  button.addEventListener("click", event => {
+    event.preventDefault();
+    event.stopPropagation();
+    const open = details.classList.toggle("is-open");
+    host.classList.toggle("ips-score-details-open", open);
+    button.setAttribute("aria-expanded", String(open));
+  });
+  holder.append(button, details);
+  host.prepend(holder);
+  card.setAttribute("data-ips-score", String(score.score ?? -1));
+  card.setAttribute("data-ips-price", String(score.contributions.find(c => c.criterion === "price")?.rawValue ?? Number.MAX_SAFE_INTEGER));
+  card.setAttribute("data-ips-area", String(score.contributions.find(c => c.criterion === "areaM2")?.rawValue ?? -1));
 }
