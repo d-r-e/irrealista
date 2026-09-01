@@ -36,7 +36,6 @@
 .ips-score-label { color: #386452; font-size: 11px; font-weight: 700; letter-spacing: .04em; text-transform: uppercase; }
 .ips-score-number { color: #146b49; font-size: 20px; letter-spacing: -.04em; line-height: 1; white-space: nowrap; }
 .ips-score-number small { margin-left: 2px; color: #51806b; font-size: 12px; letter-spacing: 0; }
-.ips-confidence { color: #68756f; font-size: 11px; font-weight: 500; }
 .ips-disclosure { color: #267550; font-size: 0; font-weight: 700; white-space: nowrap; }
 .ips-disclosure::after { margin-left: 4px; content: "›"; font-size: 16px; vertical-align: -1px; }
 
@@ -130,8 +129,4 @@
   background: #247653!important;
   box-shadow: inset 0 2px 0 #4eaa7f, 0 0 0 2px #d4ebdf;
   color: #fff!important;
-}
-
-@media (max-width: 540px) {
-  .ips-confidence { display: none; }
 }
