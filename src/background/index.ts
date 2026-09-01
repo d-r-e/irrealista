@@ -3,7 +3,6 @@ import { normalizeListing } from "../content/idealista-parser";
 import { scoreProperty } from "../scoring/engine";
 import { getPreferences, savePreferences } from "../storage/preferences";
 import { getCachedListing, saveCachedListing, sourceHash } from "../storage/listings";
-import { getProviderConfig, saveProviderConfig } from "../storage/provider";
 import { getRouteApiConfig, saveRouteApiConfig } from "../storage/routes-config";
 import { getCachedMetroRoute, saveCachedMetroRoute } from "../storage/routes";
 import { calculateMetroRoute } from "../routing/metro";
@@ -50,8 +49,6 @@ chrome.runtime.onMessage.addListener((message: ExtensionMessage, _sender, sendRe
   void (async () => {
     if (message.type === "GET_PREFERENCES") return sendResponse(await getPreferences());
     if (message.type === "SAVE_PREFERENCES") { await savePreferences(message.payload); return sendResponse({ ok: true }); }
-    if (message.type === "GET_PROVIDER_CONFIG") return sendResponse(await getProviderConfig());
-    if (message.type === "SAVE_PROVIDER_CONFIG") { await saveProviderConfig(message.payload); return sendResponse({ ok: true }); }
     if (message.type === "GET_ROUTE_API_CONFIG") return sendResponse(await getRouteApiConfig());
     if (message.type === "SAVE_ROUTE_API_CONFIG") { await saveRouteApiConfig(message.payload); return sendResponse({ ok: true }); }
     if (message.type === "GET_METRO_ROUTE") return sendResponse(await enqueueMetroRoute(message.payload));

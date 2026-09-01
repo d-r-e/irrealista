@@ -25,9 +25,7 @@ En `chrome://extensions`, activa **Modo de desarrollador**, pulsa **Cargar desco
 
 ## Configuración
 
-En las opciones de la extensión puedes ajustar los pesos del score y configurar OpenRouteService para calcular las rutas a pie. Las rutas se cachean por anuncio.
-
-También hay un panel para un endpoint compatible con OpenAI, pero el score actual es determinista y no necesita IA para funcionar. Las claves se guardan únicamente en el almacenamiento local del navegador; no se incluyen en el bundle ni se leen de `.env`.
+En las opciones de la extensión puedes ajustar los pesos del score y configurar OpenRouteService para calcular las rutas a pie. Las rutas se cachean por anuncio y la clave se guarda únicamente en el almacenamiento local del navegador.
 
 ## Desarrollo
 
