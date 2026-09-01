@@ -25,20 +25,20 @@ Idealista permite filtrar. Irrealista ayuda a **decidir**.
 Puntúa cada anuncio visible con un modelo explicable de 0–100, permite ordenarlo desde la barra nativa y lleva a cada tarjeta las señales que normalmente se pierden entre fotos bonitas y texto comercial: €/m², altura, ascensor, exterior, reforma, habitabilidad y minutos reales andando al metro.
 
 <p align="center">
+  <img src="docs/screenshots/real-search-hard-filter.jpg" alt="Búsqueda real de Idealista con score, rutas de metro y un anuncio descartado" width="100%">
+</p>
+
+> Una búsqueda real de 29 viviendas en Madrid: junto a los scores y las rutas de metro, un bajo registrado como local queda marcado como **“No cumple tus filtros”**.
+
+## El contexto importa
+
+La extensión no confunde un anuncio bonito con una vivienda viable. También sirve para explorar casos excelentes sin perder de vista el precio, la planta, la orientación y la accesibilidad.
+
+<p align="center">
   <img src="docs/screenshots/luxury-list.jpg" alt="Búsqueda de áticos de lujo en Madrid con score, ordenación y metro" width="100%">
 </p>
 
-> Captura de una búsqueda real de áticos de lujo en Madrid. El anuncio mostrado es efímero y puede dejar de estar disponible; la captura ilustra la interfaz, no una recomendación de compra.
-
-## No todo lo bien reformado es hipotecable
-
-La extensión no confunde un anuncio bonito con una vivienda viable. En este ejemplo real, el texto anuncia un loft “sin cédula”; Irrealista lo marca como un descarte explícito.
-
-<p align="center">
-  <img src="docs/screenshots/no-habitability-certificate.jpg" alt="Anuncio de loft sin cédula de habitabilidad" width="100%">
-</p>
-
-Los ejemplos se han tomado de anuncios públicos de Idealista: un [ático en Palacio](https://www.idealista.com/inmueble/107858732/) y un [loft sin cédula en Pilar](https://www.idealista.com/inmueble/111724136/). Sus precios, textos y disponibilidad pueden cambiar.
+Las capturas usan anuncios públicos y búsquedas reales de Idealista. Precios, textos y disponibilidad pueden cambiar; ilustran la interfaz, no recomendaciones de compra.
 
 ## Qué mira
 
