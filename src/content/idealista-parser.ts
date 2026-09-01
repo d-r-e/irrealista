@@ -24,7 +24,7 @@ export function normalizeListing(raw: IdealistaListingRaw): PropertyFeatures {
   const energyRaw = extractNumber(/Consumo:\s*([\d.,]+)\s*kWh\s*\/\s*m²\s*año/i);
   const energyConsumption = energyRaw && energyRaw >= 10 ? energyRaw : null;
   const heatingQuality = /no dispone de calefacción|sin calefacción/i.test(detail) ? 15 : /calefacción central/i.test(detail) ? 100 : /gas natural/i.test(detail) ? 95 : /bomba de frío\s*\/\s*calor/i.test(detail) ? 70 : /calefacción individual/i.test(detail) ? 75 : null;
-  const needsRenovation = /segunda mano\s*\/\s*para reformar|\b(?:íntegramente\s+)?a reformar\b|reforma integral necesaria/i.test(detail) ? true : /segunda mano\s*\/\s*buen estado|reformad[oa]\s+(?:integralmente|recientemente)|a estrenar/i.test(detail) ? false : null;
+  const needsRenovation = /segunda mano\s*\/\s*para reformar|\b(?:íntegramente\s+)?a reformar\b|reforma integral necesaria|\bpara actualizar\b/i.test(detail) ? true : /segunda mano\s*\/\s*buen estado|reformad[oa]\s+(?:integralmente|recientemente)|a estrenar/i.test(detail) ? false : null;
   const detailKnown = Boolean(raw.detailText);
   const knownBoolean = (pattern: RegExp): boolean | null => pattern.test(detail) ? true : detailKnown ? false : null;
   const hasOutdoorSpace = knownBoolean(/\bterraza\b|\bbalcón\b|patio de uso privativo|\bjardín\b/i);

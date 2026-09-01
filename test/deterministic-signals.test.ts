@@ -56,4 +56,14 @@ describe("deterministic listing signals", () => {
     const renovation = scoreProperty(normalizeListing(raw("Segunda mano/para reformar", true)), defaultPreferences);
     expect(renovation.contributions.find(item => item.criterion === "needsRenovation")?.utility).toBeGreaterThan(standard.contributions.find(item => item.criterion === "needsRenovation")?.utility ?? 0);
   });
+
+  it("recognizes 'para actualizar' as a renovation signal and lowers the score", () => {
+    const updated = scoreProperty(normalizeListing(raw("Segunda mano/buen estado. Lista para entrar a vivir.")), defaultPreferences);
+    const needsUpdatingProperty = normalizeListing(raw("Vivienda para actualizar con muchas posibilidades."));
+    const needsUpdating = scoreProperty(needsUpdatingProperty, defaultPreferences);
+
+    expect(needsUpdatingProperty.needsRenovation.value).toBe(true);
+    expect(needsUpdating.contributions.find(item => item.criterion === "needsRenovation")?.utility).toBe(10);
+    expect(needsUpdating.score).toBeLessThan(updated.score ?? 100);
+  });
 });
