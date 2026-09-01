@@ -9,10 +9,14 @@ Extensión de Chrome para puntuar anuncios de Idealista con criterios personales
 - **Descartes claros.** Señala subastas, compras no hipotecables, inmuebles sin posesión, locales/cambios de uso y anuncios sin cédula de habitabilidad.
 
 <p align="center">
-  <img src="docs/screenshots/real-search-hard-filter.jpg" alt="Búsqueda real de Idealista con score, rutas de metro y un anuncio descartado" width="100%">
+  <img src="docs/screenshots/real-search-sort.jpg" alt="Ordenación integrada por score y ruta al Metro de Madrid" width="100%">
 </p>
 
-La captura corresponde a una búsqueda real. Los anuncios, precios y disponibilidad pueden cambiar.
+<p align="center">
+  <img src="docs/screenshots/real-search-hard-filter.jpg" alt="Anuncio descartado dentro de una búsqueda real de Idealista" width="100%">
+</p>
+
+Capturas de una búsqueda real. Los anuncios, precios y disponibilidad pueden cambiar.
 
 ## Instalar
 
